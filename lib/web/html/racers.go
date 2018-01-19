@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/JamesClonk/iRnotify/lib/env"
 	"github.com/JamesClonk/iRnotify/lib/racers"
 	"github.com/JamesClonk/iRnotify/lib/web"
 	"github.com/gorilla/mux"
@@ -15,7 +16,7 @@ func Racers(rw http.ResponseWriter, req *http.Request) {
 		Active: "racers",
 	}
 
-	data, err := racers.GetFriends()
+	data, err := racers.GetRacers(env.Get("IRACING_NAME", "Fabio+Berchtold"))
 	if err != nil {
 		Error(rw, err)
 		return

@@ -45,21 +45,28 @@ func parseRacingData(data []byte) error {
 	for i := range racingData.Racers {
 		racingData.Racers[i].Name = strings.Replace(racingData.Racers[i].Name, "+", " ", -1)
 	}
+	for i := range racingData.SearchRacers {
+		racingData.SearchRacers[i].Name = strings.Replace(racingData.SearchRacers[i].Name, "+", " ", -1)
+	}
+
+	for _, racer := range racingData.SearchRacers {
+		racingData.Racers = append(racingData.Racers, racer)
+	}
 
 	racingData.Timestamp = time.Now()
 	return nil
 }
 
-func GetFriends() (RacingData, error) {
+func GetRacers(name string) (RacingData, error) {
 	if time.Now().After(racingData.Timestamp.Add(1 * time.Minute)) {
-		if err := updateRacingData(); err != nil {
+		if err := updateRacingData(name); err != nil {
 			return racingData, err
 		}
 	}
 	return racingData, nil
 }
 
-func updateRacingData() error {
+func updateRacingData(name string) error {
 	// login if older than 10 minutes
 	if time.Now().After(racingData.Timestamp.Add(10 * time.Minute)) {
 		if err := Login(); err != nil {
@@ -67,7 +74,7 @@ func updateRacingData() error {
 		}
 	}
 
-	data, err := getData("http://members.iracing.com/membersite/member/GetDriverStatus?friends=1")
+	data, err := getData(fmt.Sprintf("http://members.iracing.com/membersite/member/GetDriverStatus?friends=1&searchTerms=%s", name))
 	if err != nil {
 		return err
 	}
@@ -97,5 +104,10 @@ func GetStats(id int) ([]CareerStats, error) {
 	if err := json.Unmarshal(data, &stats); err != nil {
 		return nil, err
 	}
+
+	for i := range stats {
+		stats[i].Category = strings.Replace(stats[i].Category, "+", " ", -1)
+	}
+
 	return stats, nil
 }

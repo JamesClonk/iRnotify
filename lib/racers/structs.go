@@ -6,8 +6,9 @@ import (
 )
 
 type RacingData struct {
-	Timestamp time.Time `json:"timestamp"`
-	Racers    []Racer   `json:"fsRacers"`
+	Timestamp    time.Time `json:"timestamp"`
+	Racers       []Racer   `json:"fsRacers"`
+	SearchRacers []Racer   `json:"searchRacers"`
 }
 
 type Racer struct {

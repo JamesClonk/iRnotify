@@ -37,7 +37,7 @@ func monitorRacers() {
 		for {
 			time.Sleep(1 * time.Minute)
 
-			data, err := racers.GetFriends()
+			data, err := racers.GetRacers(env.Get("IRACING_NAME", "Fabio+Berchtold"))
 			if err != nil {
 				log.Println(err)
 			}

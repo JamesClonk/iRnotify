@@ -36,7 +36,7 @@ func init() {
 	}
 }
 
-func notify(racer racers.Racer) {
+func notify(racer racers.Racer) error {
 	// 0123456789:242335#38135;987654321:291357
 	receivers := strings.SplitN(env.MustGet("IRNOTIFY_RECEIVERS"), ";", -1)
 
@@ -49,10 +49,13 @@ func notify(racer racers.Racer) {
 			if watchedID == fmt.Sprintf("%d", racer.CustID) {
 				text := fmt.Sprintf("%s is in a %s session right now, driving a %s on %s",
 					racer.Name, racer.SessionTypeName, racer.CarName, racer.TrackName)
-				sendSms(phoneNum, text)
+				if err := sendSms(phoneNum, text); err != nil {
+					return err
+				}
 			}
 		}
 	}
+	return nil
 }
 
 func sendSms(phoneNum, text string) error {

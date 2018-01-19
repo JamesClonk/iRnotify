@@ -10,7 +10,7 @@ dev:
 	scripts/dev.sh
 
 binary:
-	GOARCH=amd64 GOOS=linux go build -i -o iRnotify
+	GOOS=linux go build -i -o iRnotify
 
 setup:
 	go get -v -u github.com/codegangsta/gin

@@ -16,3 +16,7 @@
 # binaries
 gin-bin
 iRnotify
+
+# temp files
+lib/racers/*.json
+lib/racers/*.js

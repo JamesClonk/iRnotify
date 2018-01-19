@@ -1,5 +1,5 @@
-hash: 9c33e680ac5de8dc078f29bd7015fb5c6f23a6aaad1d7e110be768363286c175
-updated: 2018-01-19T09:37:42.463571832+01:00
+hash: f3f7d9d392a5e476163b6cdbd8a5da520c9102f7475e2b1ee9fc9e5eade55b9e
+updated: 2018-01-19T20:14:15.689329664+01:00
 imports:
 - name: github.com/cloudfoundry-community/go-cfenv
   version: f920e9562d5f951cbf11785728f67258c38a10d0
@@ -7,6 +7,8 @@ imports:
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/mux
   version: 7f08801859139f86dfafd1c296e2cba9a80d292e
+- name: github.com/mitchellh/mapstructure
+  version: f3009df150dadf309fdee4a54ed65c124afad715
 - name: github.com/unrolled/render
   version: 32bf1ea2a39e4e796d9040b5cf235258cee978c1
 - name: github.com/urfave/negroni

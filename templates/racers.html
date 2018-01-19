@@ -11,24 +11,32 @@
 
 <section class="section is-paddingless">
   <div class="container">
-    <table class="table is-bordered is-striped is-fullwidth">
+    <table class="table is-bordered is-striped is-fullwidth is-narrow is-hoverable">
       <thead>
         <tr>
           <th>Name</th>
           <th>LastLogin</th>
           <th>LastSeen</th>
+          <th>Session</th>
+          <th>Car</th>
+          <th>Track</th>
           <th>SessionStatus</th>
           <th>SubSessionStatus</th>
+          <th>RegStatus</th>
         </tr>
       </thead>
       <tbody>
         {{ range $i, $e := .Content.Racers }}
         <tr {{ if ne $e.SubSessionStatus "none" }}class="is-selected"{{ end }}>
           <td><a href="/racer/{{ $e.CustID }}">{{ $e.Name }}</a></td>
-          <td>{{ $e.LastLogin }}</td>
-          <td>{{ if ne $e.LastSeen.Unix 0 }}{{ $e.LastSeen }}{{ else }}-{{ end }}</td>
+          <td>{{ $e.LastLogin.Format `2006.01.02. - 15:04` }}</td>
+          <td>{{ if ne $e.LastSeen.Unix 0 }}{{ $e.LastSeen.Format `2006.01.02. - 15:04` }}{{ else }}-{{ end }}</td>
+          <td>{{ $e.SessionTypeName }}</td>
+          <td>{{ $e.CarName }}</td>
+          <td>{{ $e.TrackName }}</td>
           <td>{{ $e.SessionStatus }}</td>
           <td>{{ $e.SubSessionStatus }}</td>
+          <td>{{ $e.RegStatus }}</td>
         </tr>
         {{ end }}
       </tbody>

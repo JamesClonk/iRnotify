@@ -42,18 +42,17 @@ func parseRacingData(data []byte) error {
 		return err
 	}
 
-	for i := range racingData.Racers {
-		racingData.Racers[i].Name = strings.Replace(racingData.Racers[i].Name, "+", " ", -1)
-	}
-	for i := range racingData.SearchRacers {
-		racingData.SearchRacers[i].Name = strings.Replace(racingData.SearchRacers[i].Name, "+", " ", -1)
-	}
-
 	for _, racer := range racingData.SearchRacers {
 		racingData.Racers = append(racingData.Racers, racer)
 	}
-
+	for i := range racingData.Racers {
+		racingData.Racers[i].Name = strings.Replace(racingData.Racers[i].Name, "+", " ", -1)
+		racingData.Racers[i].TrackName = Track(racingData.Racers[i].TrackID)
+		racingData.Racers[i].CarName = Car(racingData.Racers[i].CarID)
+		racingData.Racers[i].SessionTypeName = SessionType(racingData.Racers[i].SessionTypeID)
+	}
 	racingData.Timestamp = time.Now()
+
 	return nil
 }
 
@@ -67,8 +66,8 @@ func GetRacers(name string) (RacingData, error) {
 }
 
 func updateRacingData(name string) error {
-	// login if older than 10 minutes
-	if time.Now().After(racingData.Timestamp.Add(10 * time.Minute)) {
+	// login if older than 15 minutes
+	if time.Now().After(racingData.Timestamp.Add(15 * time.Minute)) {
 		if err := Login(); err != nil {
 			return err
 		}

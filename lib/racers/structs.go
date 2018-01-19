@@ -12,23 +12,27 @@ type RacingData struct {
 }
 
 type Racer struct {
-	Broadcast      interface{} `json:"broadcast"`
-	DriverChanges  bool        `json:"driverChanges"`
-	LastLogin      unixTime    `json:"lastLogin"`
-	MaxUsers       int         `json:"maxUsers"`
-	HasGrid        int         `json:"hasGrid"`
-	TrackId        int         `json:"trackId"`
-	SessionStatus  string      `json:"sessionStatus"`
-	SessionTypeID  int         `json:"sessionTypeId"`
-	PrivateSession interface{} `json:"privateSession"`
-	SeriesID       int         `json:"seriesId"`
-	RegOpen        bool        `json:"regOpen"`
-	CatID          int         `json:"catId"`
-	EventTypeID    int         `json:"eventTypeId"`
-	SpotterAccess  int         `json:"spotterAccess"`
-	LastSeen       unixTime    `json:"lastSeen"`
-	SeasonID       int         `json:"seasonId"`
-	Helmet         struct {
+	Broadcast       interface{} `json:"broadcast"`
+	DriverChanges   bool        `json:"driverChanges"`
+	LastLogin       unixTime    `json:"lastLogin"`
+	MaxUsers        int         `json:"maxUsers"`
+	HasGrid         int         `json:"hasGrid"`
+	TrackID         int         `json:"trackId"`
+	TrackName       string      `json:"trackName"`
+	SessionStatus   string      `json:"sessionStatus"`
+	SessionID       int         `json:"sessionId"`
+	SessionTypeID   int         `json:"sessionTypeId"`
+	SessionTypeName string      `json:"sessionTypeName"`
+	PrivateSession  interface{} `json:"privateSession"`
+	SeriesID        int         `json:"seriesId"`
+	RegOpen         bool        `json:"regOpen"`
+	RegStatus       string      `json:"regStatus"`
+	CatID           int         `json:"catId"`
+	EventTypeID     int         `json:"eventTypeId"`
+	SpotterAccess   int         `json:"spotterAccess"`
+	LastSeen        unixTime    `json:"lastSeen"`
+	SeasonID        int         `json:"seasonId"`
+	Helmet          struct {
 		Color1 string `json:"c1"`
 		Color2 string `json:"c2"`
 		Color3 string `json:"c3"`
@@ -40,6 +44,9 @@ type Racer struct {
 	StartTime        unixTime `json:"startTime"`
 	UserRole         int      `json:"userRole"`
 	SubSessionStatus string   `json:"subSessionStatus"`
+	SubSessionID     int      `json:"subSessionId"`
+	CarID            int      `json:"carId"`
+	CarName          string   `json:"carName"`
 }
 
 type CareerStats struct {

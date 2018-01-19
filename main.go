@@ -9,13 +9,13 @@ import (
 	"time"
 
 	"github.com/JamesClonk/iRnotify/lib/env"
-	"github.com/JamesClonk/iRnotify/lib/racers"
+	"github.com/JamesClonk/iRnotify/lib/monitoring"
 	"github.com/JamesClonk/iRnotify/lib/web/router"
 	"github.com/urfave/negroni"
 )
 
 func main() {
-	monitorRacers()
+	monitoring.New().Start()
 
 	// setup SIGINT catcher for graceful shutdown
 	stop := make(chan os.Signal, 1)
@@ -30,25 +30,6 @@ func main() {
 	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 	server.Shutdown(ctx)
 	log.Println("Server gracefully stopped")
-}
-
-func monitorRacers() {
-	go func() {
-		for {
-			time.Sleep(1 * time.Minute)
-
-			data, err := racers.GetRacers(env.Get("IRACING_NAME", "Fabio+Berchtold"))
-			if err != nil {
-				log.Println(err)
-			}
-
-			for _, racer := range data.Racers {
-				if racer.UserRole == 0 && racer.SubSessionStatus == "subses_running" {
-					log.Printf("Session running! \n%#v\n", racer)
-				}
-			}
-		}
-	}()
 }
 
 func setupNegroni() *negroni.Negroni {

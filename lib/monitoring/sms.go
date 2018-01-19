@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/JamesClonk/iRnotify/lib/env"
 	"github.com/JamesClonk/iRnotify/lib/racers"
@@ -13,8 +14,11 @@ import (
 )
 
 var clientId string
+var sentCache map[string]time.Time
 
 func init() {
+	sentCache = make(map[string]time.Time, 0)
+
 	// check for VCAP_SERVICES first
 	vcap, err := cfenv.Current()
 	if err != nil {
@@ -49,9 +53,18 @@ func notify(racer racers.Racer) error {
 			if watchedID == fmt.Sprintf("%d", racer.CustID) {
 				text := fmt.Sprintf("%s is in a %s session right now, driving a %s on %s",
 					racer.Name, racer.SessionTypeName, racer.CarName, racer.TrackName)
+				log.Println(text)
+
+				// check if we need to send an sms or if there was already one recently
+				if sent, found := sentCache[fmt.Sprintf("%d:%d:%s", racer.CustID, racer.SubSessionID, phoneNum)]; found {
+					if time.Now().Before(sent.Add(60 * time.Minute)) {
+						continue
+					}
+				}
 				if err := sendSms(phoneNum, text); err != nil {
 					return err
 				}
+				sentCache[fmt.Sprintf("%d:%d:%s", racer.CustID, racer.SubSessionID, phoneNum)] = time.Now()
 			}
 		}
 	}

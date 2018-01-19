@@ -38,6 +38,7 @@ func getData(url string) ([]byte, error) {
 }
 
 func parseRacingData(data []byte) error {
+	racingData = RacingData{} // clear all previously stored values
 	if err := json.Unmarshal(data, &racingData); err != nil {
 		return err
 	}
@@ -49,7 +50,7 @@ func parseRacingData(data []byte) error {
 		racingData.Racers[i].Name = strings.Replace(racingData.Racers[i].Name, "+", " ", -1)
 		racingData.Racers[i].TrackName = Track(racingData.Racers[i].TrackID)
 		racingData.Racers[i].CarName = Car(racingData.Racers[i].CarID)
-		racingData.Racers[i].SessionTypeName = SessionType(racingData.Racers[i].SessionTypeID)
+		racingData.Racers[i].SessionTypeName = SessionType(racingData.Racers[i].SessionTypeID, racingData.Racers[i].UserRole)
 	}
 	racingData.Timestamp = time.Now()
 

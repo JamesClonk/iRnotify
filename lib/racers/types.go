@@ -1,9 +1,15 @@
 package racers
 
-func SessionType(id int) string {
+func SessionType(id, userRole int) string {
+	if userRole == 2 {
+		return "Spectator"
+	}
+
 	switch id {
 	case 170:
 		return "Practice"
+	case 280:
+		return "Racing"
 	case 293:
 		return "Qualifying"
 	default:
@@ -36,10 +42,14 @@ func Car(id int) string {
 
 func Track(id int) string {
 	switch id {
+	case 18, 50:
+		return "Road America"
 	case 46, 99, 100:
 		return "Barber"
 	case 47, 158:
 		return "Laguna Seca"
+	case 126, 127, 128:
+		return "Road Atlanta"
 	case 145, 146:
 		return "Brands Hatch"
 	case 147, 148, 149, 150, 151:

@@ -30,8 +30,7 @@ func monitorRacers() {
 			}
 
 			for _, racer := range data.Racers {
-				if racer.UserRole == 0 &&
-					(racer.SubSessionStatus == "subses_running" || racer.SubSessionID != 0) {
+				if racer.UserRole == 0 && racer.SubSessionStatus == "subses_running" {
 					log.Printf("Session running! \n%#v\n", racer)
 					if err := notify(racer); err != nil {
 						log.Println(err)

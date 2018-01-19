@@ -27,7 +27,7 @@
       </thead>
       <tbody>
         {{ range $i, $e := .Content.Racers }}
-        <tr {{ if ne $e.SubSessionStatus "none" }}class="is-selected"{{ end }}>
+        <tr {{ if and (ne $e.SubSessionStatus "none") (eq $e.UserRole 0) }}class="is-selected"{{ end }}>
           <td><a href="/racer/{{ $e.CustID }}">{{ $e.Name }}</a></td>
           <td>{{ $e.LastLogin.Format `2006.01.02. - 15:04` }}</td>
           <td>{{ if ne $e.LastSeen.Unix 0 }}{{ $e.LastSeen.Format `2006.01.02. - 15:04` }}{{ else }}-{{ end }}</td>

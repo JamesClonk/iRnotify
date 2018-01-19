@@ -1,0 +1,26 @@
+hash: 9c33e680ac5de8dc078f29bd7015fb5c6f23a6aaad1d7e110be768363286c175
+updated: 2018-01-19T09:37:42.463571832+01:00
+imports:
+- name: github.com/cloudfoundry-community/go-cfenv
+  version: f920e9562d5f951cbf11785728f67258c38a10d0
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/mux
+  version: 7f08801859139f86dfafd1c296e2cba9a80d292e
+- name: github.com/unrolled/render
+  version: 32bf1ea2a39e4e796d9040b5cf235258cee978c1
+- name: github.com/urfave/negroni
+  version: 079cf0c7a6b0145ebcf4103ec90380370cd89917
+testImports:
+- name: github.com/davecgh/go-spew
+  version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
+  subpackages:
+  - difflib
+- name: github.com/stretchr/testify
+  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
+  subpackages:
+  - assert

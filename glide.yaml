@@ -1,0 +1,6 @@
+package: github.com/JamesClonk/iRnotify
+import:
+- package: github.com/cloudfoundry-community/go-cfenv
+- package: github.com/gorilla/mux
+- package: github.com/unrolled/render
+- package: github.com/urfave/negroni

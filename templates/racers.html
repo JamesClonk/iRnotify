@@ -1,0 +1,37 @@
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-narrow">
+        <h1 class="title">Racers</h1>
+        <h2 class="subtitle">Friends<small> ({{ len .Content.Racers }})</small></h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-paddingless">
+  <div class="container">
+    <table class="table is-bordered is-striped is-fullwidth">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>LastLogin</th>
+          <th>LastSeen</th>
+          <th>SessionStatus</th>
+          <th>SubSessionStatus</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range $i, $e := .Content.Racers }}
+        <tr {{ if ne $e.SubSessionStatus "none" }}class="is-selected"{{ end }}>
+          <td><a href="/racer/{{ $e.CustID }}">{{ $e.Name }}</a></td>
+          <td>{{ $e.LastLogin }}</td>
+          <td>{{ if ne $e.LastSeen.Unix 0 }}{{ $e.LastSeen }}{{ else }}-{{ end }}</td>
+          <td>{{ $e.SessionStatus }}</td>
+          <td>{{ $e.SubSessionStatus }}</td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </div>
+</section>

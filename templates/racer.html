@@ -1,0 +1,49 @@
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-narrow">
+        <h1 class="title">Racer</h1>
+        <h2 class="subtitle">{{ .Content.Racer.Name }}</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-paddingless">
+  <div class="container">
+    <table class="table is-bordered is-striped is-fullwidth">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Starts</th>
+          <th>Wins</th>
+          <th>Top 5</th>
+          <th>Poles</th>
+          <th>Total Laps</th>
+          <th>Laps Led</th>
+          <th>Avg. Start</th>
+          <th>Avg. Finish</th>
+          <th>Avg. Incidents</th>
+          <th>Avg. Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range $i, $e := .Content.Stats }}
+        <tr>
+          <td>{{ $e.Category }}</td>
+          <td>{{ $e.Starts }}</td>
+          <td>{{ $e.Wins }}</td>
+          <td>{{ $e.Top5 }}</td>
+          <td>{{ $e.Poles }}</td>
+          <td>{{ $e.TotalLaps }}</td>
+          <td>{{ $e.LapsLed }}</td>
+          <td>{{ $e.AverageStart }}</td>
+          <td>{{ $e.AverageFinish }}</td>
+          <td>{{ $e.AverageIncidentsPerRace }}</td>
+          <td>{{ $e.AveragePointsPerRace }}</td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </div>
+</section>

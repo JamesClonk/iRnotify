@@ -85,7 +85,10 @@ func sendSms(phoneNum, text string) error {
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusNoContent {
+	if (resp.StatusCode != http.StatusOK) &&
+		(resp.StatusCode != http.StatusCreated) &&
+		(resp.StatusCode != http.StatusAccepted) &&
+		(resp.StatusCode != http.StatusNoContent) {
 		return fmt.Errorf("SMS status code: %v", resp.StatusCode)
 	}
 	return nil

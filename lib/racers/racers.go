@@ -58,7 +58,7 @@ func parseRacingData(data []byte) error {
 }
 
 func GetRacers(name string) (RacingData, error) {
-	if time.Now().After(racingData.Timestamp.Add(1 * time.Minute)) {
+	if time.Now().After(racingData.Timestamp.Add(3 * time.Minute)) {
 		if err := updateRacingData(name); err != nil {
 			return racingData, err
 		}
@@ -74,7 +74,7 @@ func updateRacingData(name string) error {
 		}
 	}
 
-	data, err := getData(fmt.Sprintf("http://members.iracing.com/membersite/member/GetDriverStatus?friends=1&searchTerms=%s", name))
+	data, err := getData(fmt.Sprintf("http://members.iracing.com/membersite/member/GetDriverStatus?friends=1&studied=1&searchTerms=%s", name))
 	if err != nil {
 		return err
 	}
